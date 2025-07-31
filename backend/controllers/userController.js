@@ -53,6 +53,18 @@ const registerUser=async (req,res)=>{
 }
 
 const adminLogin=async (req,res)=>{
+    try{
+        const {email,password}=req.body;
+        if(email===process.env.ADMIN_EMAIL && password===process.env.ADMIN_PASSWORD){
+            // const token=createToken(email+password);
+            const token=jwt.sign(email+password,process.env.JWT_SECRET)
+            res.status(200).json({token:token})
+        }else{
+            res.status(400).json({message:"invalid credentials"})
+        }
+    }catch(error){
+        res.status(400).json({message:"Email or password is wrong"})
+    }
 
 }
 

@@ -45,17 +45,38 @@ const addProduct=async (req,res)=>{
     }
 }
 
-const listProducts=async()=>{
+const listProducts=async(req,res)=>{
+    try{
+        const products=await productModel.find({});
+        res.status(200).json({products})
+    }catch(error){
+        res.status(400).json({message:"something went wrong"})
+    }
+}
+
+
+const removeProduct=async(req,res)=>{
+    try{
+        await productModel.findByIdAndDelete(req.body.id)
+        res.status(200).json({message:"product removed"}) 
+    }catch(error){
+        res.status(400).json({message:"error in removing product"})
+    }
 
 }
 
 
-const removeProduct=async()=>{
-
-}
-
-
-const singleProduct=()=>{
+const singleProduct=async (req,res)=>{
+    try{
+        const {productId}=req.body;
+        const product=await productModel.findById(productId)
+        // if(!product){
+        //     res.json({message:"something went wrong1"})
+        // }
+        res.status(200).json({product})
+    }catch(error){
+        res.status(400).json({message:"something went wrong2"})
+    }
 
 }
 
