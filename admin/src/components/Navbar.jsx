@@ -1,11 +1,11 @@
 import React from 'react'
 import { assets } from '../assets/assets'
 
-const Navbar = () => {
+const Navbar = ({setToken}) => {
   return (
     <div className='flex justify-between items-center py-2 px-[4%]' >
-        <img className="h-14" src={assets.logo} alt="" />
-        <button className='bg-gray-600 text-white px-7 rounded-4xl py-1.5'>Logout</button>
+        <img className="w-[max(10%,80px)]" src={assets.logo} alt="" />
+        <button onClick={()=>(setToken(''))}  className='bg-gray-600 text-white px-5 sm:px-7 rounded-full py-2 sm:text-xs sm:text-sm'>Logout</button>
     </div>
   )
 }
